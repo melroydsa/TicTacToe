@@ -1,0 +1,159 @@
+<html>
+    <style>
+        input
+        {
+            width: 160px;
+            height: 160px;
+            font-size: 50px;
+            border-width: 10px;
+            transition: all 0.17s ease-in-out;
+        }
+        input:hover
+        {
+            background-color: lightseagreen;
+        }
+        #CLB
+        {
+            width: 200px;
+            height: 100px;
+            border-width: 10px;
+            font-size: 30px;
+        }
+        div
+        {
+            padding-top: 20px;
+            font-size: 30px;
+        }
+    </style>
+    <center>
+    <table id="tab">
+        <tr><td><input type="button" id="1" value="" onclick="XY(1)"></td><td><input type="button" id="2" value="" onclick="XY(2)"></td><td><input type="button" id="3" value="" onclick="XY(3)"></td></tr>
+        <tr><td><input type="button" id="4" value="" onclick="XY(4)"></td><td><input type="button" id="5" value="" onclick="XY(5)"></td><td><input type="button" id="6" value="" onclick="XY(6)"></td></tr>
+        <tr><td><input type="button" id="7" value="" onclick="XY(7)"></td><td><input type="button" id="8" value="" onclick="XY(8)"></td><td><input type="button" id="9" value="" onclick="XY(9)"></td></tr>
+    </table>
+    </center>
+    <center>
+        <input type="button"  id="CLB" value="Clear Board" onclick="Clear()">
+        <div id="Pla">
+            Player 1 turn
+        </div>
+    </center>
+    <script>
+        turn = 1; //Player 1 is X, Player 2 is Y
+        letter = "X";
+        total = 1;
+        win = 0;
+        board=["","","","","","","","","",""];
+        function XY(id)
+        {
+            if(total!=10)
+            {
+                if(turn==1)
+                {
+                    if(document.getElementById(id).value == "X"||document.getElementById(id).value == "Y")
+                    {
+                        document.getElementById("Pla").innerHTML="Already clicked";
+                        
+                    }
+                    else
+                    {
+                        document.getElementById(id).style.backgroundColor = "skyblue";
+                        document.getElementById(id).value= letter;
+                        board[id] = letter; 
+                        if(total>=5&&total<10)
+                        {
+                            CheckPattern();
+                        }
+                        turn = 0 ;
+                        document.getElementById("Pla").innerHTML= document.getElementById("Pla2").value+"turn";
+                        letter = "Y";
+                        if(win == 1)
+                        {
+                            total = 10;
+                        }
+                        else
+                            total++;
+                    }
+                }
+                else
+                {
+                    if(document.getElementById(id).value == "X"||document.getElementById(id).value == "Y")
+                    {
+                        document.getElementById("Pla").innerHTML="Already clicked";
+                        
+                    }
+                    else
+                    {
+                        document.getElementById(id).style.backgroundColor = "lightsalmon";
+                        document.getElementById(id).value= letter;
+                        board[id] = letter; 
+                        if(total>=5&&total<10)
+                        {
+                            CheckPattern();
+                        }
+                        document.getElementById("Pla").innerHTML = "Player 1 turn";
+                        turn = 1 ;
+                        letter = "X";
+                        if(win == 2)
+                        {
+                            total = 10;
+                        }
+                        else
+                            total++;
+                    }
+                }
+            }
+            if(total==10)
+            {
+                switch(win)
+                {
+                    case 1: document.getElementById("Pla").innerHTML="Player One wins";
+                            break;
+                    case 2: document.getElementById("Pla").innerHTML="Player Two wins";
+                            break;
+                    default: document.getElementById("Pla").innerHTML="Game over";
+                }
+            }
+        }
+        function Clear()
+        {
+            total = 1;
+            win = 0;
+            for(id=1;id<10;id++)
+            {
+                document.getElementById(id).value = " ";
+                document.getElementById(id).style.backgroundColor="white";
+                document.getElementById(id).style.cssText = "input:hover { background-color: lightseagreen ; }";
+                board[id] = " ";
+            }
+            document.getElementById("Pla").innerHTML = "Player 1 turn";
+            letter = "X";
+            turn=1;
+        }
+        pattern = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+        function CheckPattern()
+        {
+            for(l=0;l<8;l++)
+            {
+                if(board[pattern[l][0]]=="X"&&board[pattern[l][1]]=="X"&&board[pattern[l][2]]=="X")
+                {
+                    win=1;
+                    break;
+                }
+                else
+                if(board[pattern[l][0]]=="Y"&&board[pattern[l][1]]=="Y"&&board[pattern[l][2]]=="Y")
+                {
+                    win = 2;
+                    break;
+                }
+            }
+            if(win>0)
+            {
+                for(i=0;i<3;i++)
+                {
+                    document.getElementById(pattern[l][i]).style.backgroundColor = "maroon";
+                }
+            }
+        }
+    </script>
+</html>

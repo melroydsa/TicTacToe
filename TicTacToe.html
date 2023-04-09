@@ -26,7 +26,7 @@
         }
     </style>
     <center>
-    <table id="tab">
+        <table id="tab"> <!--The ID of the button is passed as the parameter to the function XY() -->
         <tr><td><input type="button" id="1" value="" onclick="XY(1)"></td><td><input type="button" id="2" value="" onclick="XY(2)"></td><td><input type="button" id="3" value="" onclick="XY(3)"></td></tr>
         <tr><td><input type="button" id="4" value="" onclick="XY(4)"></td><td><input type="button" id="5" value="" onclick="XY(5)"></td><td><input type="button" id="6" value="" onclick="XY(6)"></td></tr>
         <tr><td><input type="button" id="7" value="" onclick="XY(7)"></td><td><input type="button" id="8" value="" onclick="XY(8)"></td><td><input type="button" id="9" value="" onclick="XY(9)"></td></tr>
@@ -65,7 +65,7 @@
                             CheckPattern();
                         }
                         turn = 0 ;
-                        document.getElementById("Pla").innerHTML= document.getElementById("Pla2").value+"turn";
+                        document.getElementById("Pla").innerHTML= "Player 2 turn"
                         letter = "Y";
                         if(win == 1)
                         {
@@ -151,7 +151,7 @@
             {
                 for(i=0;i<3;i++)
                 {
-                    document.getElementById(pattern[l][i]).style.backgroundColor = "maroon";
+                    document.getElementById(pattern[l][i]).style.backgroundColor = "rgb(255, 44, 44)";
                 }
             }
         }
